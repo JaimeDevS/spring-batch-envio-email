@@ -1,15 +1,15 @@
-# ![DevSuperior logo](https://raw.githubusercontent.com/devsuperior/bds-assets/main/ds/devsuperior-logo-small.png) Job responsible for sending emails automatically using Spring Batch
->  Case study to implement a job to send emails using Spring Batch
+# ![DevSuperior logo](https://raw.githubusercontent.com/devsuperior/bds-assets/main/ds/devsuperior-logo-small.png) Job responsável pelo envio automático de e-mails usando Spring Batch
+> Estudo de caso para implementar uma tarefa de envio de e-mails usando o Spring Batch.
 
 #### Before starting
 
-- [Using Docker Compose with MySQL and phpMyAdmin](https://github.com/devsuperior/docker-compose-mysql)
+- [Utilizando Docker Compose com MySQL e phpMyAdmin](https://github.com/devsuperior/docker-compose-mysql)
 
 ### Steps Spring Batch:
 
-- Reading: Read users with loans close to return (number of days to return or renew book minus 1 day)
-- Processing: Generate email message (template)
-- Writing: Send email notifying return
+- Leitura: Verificar os usuários com empréstimos próximos do vencimento (número de dias para devolução ou renovação do empréstimo menos 1 dia)
+- Processamento: Gerar mensagem de e-mail (modelo)
+- Escrita: Enviar e-mail notificando a devolução
 
 ### Resources:
 
@@ -83,7 +83,7 @@ INSERT INTO tb_user_book_loan(user_id, book_id, loan_date) VALUES(3, 2, '2023-01
 	}
 ```
 
-#### Query to get users who have borrowed books close to return (business rule: books must be returned or renewed within 7 days / Read Step)
+#### Consulta para obter usuários que pegaram livros emprestados e estão perto de devolvê-los (regra de negócio: os livros devem ser devolvidos ou renovados em até 7 dias / Etapa de Leitura)
 
 ```sql
 SELECT
@@ -115,7 +115,7 @@ private String generateEmailText(UserBookLoan loan) {
 }
 ```
 
-#### Method to send email (Writer Step)
+#### Método para enviar e-mail (Writer Step)
 
 ```java
 private void sendEmail(Mail email) {
@@ -138,12 +138,12 @@ private void sendEmail(Mail email) {
 	}
 ```
 
-#### Add environment variable
+#### Adicionar variável de ambiente
 ```
 spring.sendgrid.api-key=KEY_SENDGRID
 ```
 
-#### Schedule sending email
+#### Agendar o envio de e-mail
 
 ```java
 @Configuration
@@ -195,7 +195,7 @@ public class SendBookLoanNotificationScheduleJob extends QuartzJobBean {
 spring.batch.job.enabled=false
 ```
 
-See all :
+Veja tudo :
 - https://stackoverflow.com/questions/28928128/schedule-a-task-to-run-at-everyday-on-a-specific-time
 - http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/tutorial-lesson-06.html
 
